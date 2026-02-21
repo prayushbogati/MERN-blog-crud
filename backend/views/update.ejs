@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update</title>
+</head>
+
+<body>
+    <h1>update</h1>
+    <form id="form">
+        search by authorName: <input type="text" name="Author" id="Author"><br>
+        edit below: <br>
+        author: <input type="text" name="author" id="author"><br>
+        title: <input type="text" name="title" id="title"><br>
+        body: <input type="text" name="body" id="body"><br>
+        <button type="submit">update</button>
+    </form>
+
+    <script>
+        const form = document.querySelector("#form");
+
+        form.addEventListener('submit', async (e) => {
+            const authorName = document.querySelector("#Author").value;
+            const author = document.querySelector("#author").value;
+            const title = document.querySelector("#title").value;
+            const body = document.querySelector("#body").value;
+
+            e.preventDefault();
+            try {
+                const response = await fetch(`http://localhost:3000/blogs/author/${authorName}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ author, title, body })
+                })
+
+                await response.json();
+
+                alert("data updated!")
+
+                form.reset()
+            }
+            catch (err) {
+                console.log(err);
+            }
+        })
+    </script>
+</body>
+
+</html>

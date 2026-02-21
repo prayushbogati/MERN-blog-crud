@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>read</title>
+</head>
+
+<body>
+    <h1>read</h1>
+
+    <h3>search all</h3>
+    <button id="searchAll">searchAll</button>
+
+    <h3>search by author</h3>
+    <form id="form">
+        author: <input type="text" name="author" id="author"><br>
+        <button type="submit">search</button>
+    </form>
+
+    <div class="container" style="display:grid; gap:20px; margin-top:50px; grid-template-columns: auto auto auto;">
+    </div>
+
+    <script>
+        const searchAll = document.querySelector("#searchAll");
+        const container = document.querySelector(".container");
+        const form = document.querySelector("#form");
+
+        searchAll.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const response = await fetch("http://localhost:3000/blogs");
+                const data = await response.json();
+
+                for (let a in data) {
+                    container.innerHTML += `
+                    <div>
+                    Author: ${data[a].author} <br>
+                    Title: ${data[a].title} <br>
+                    Body: ${data[a].body} <br>
+                    
+                    </div>
+                    `
+                }
+                // console.log(data[0].author);
+
+            }
+            catch (err) {
+                console.log(err);
+            }
+        })
+
+        form.addEventListener('submit', async (e) => {
+            const authorName = document.querySelector("#author").value;
+            e.preventDefault();
+            if (authorName != "") {
+                try {
+                    const response = await fetch(`http://localhost:3000/blogs/author/${authorName}`);
+                    const data = await response.json();
+
+                    if (data.length == 0) {
+                        container.innerText = "No data available"
+                        form.reset();
+                    }
+                    else {
+
+                        for (let a in data) {
+                            container.innerHTML += `
+                                <div>
+                                    Author: ${data[a].author} <br>
+                                    Title: ${data[a].title} <br>
+                                    Body: ${data[a].body} <br>         
+                                </div>
+                            `
+                        }
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "backend-revision",
+  "version": "1.0.0",
+  "description": "for revising backend",
+  "keywords": [
+    "backend",
+    "mongodb",
+    "express"
+  ],
+  "license": "ISC",
+  "author": "prayush",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.1.0",
+    "mongoose": "^9.2.1"
+  }
+}

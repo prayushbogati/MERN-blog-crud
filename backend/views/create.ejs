@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create</title>
+</head>
+
+<body>
+    <h1>create</h1>
+    <form id="form">
+        author: <input type="text" name="author" id="author"><br>
+        title: <input type="text" name="title" id="title"><br>
+        body: <input type="text" name="body" id="body"><br>
+        <button type="submit">save</button>
+    </form>
+    <script>
+        const btn = document.querySelector("button");
+        const form = document.querySelector("#form");
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const author = document.querySelector("#author").value
+            const title = document.querySelector("#title").value
+            const body = document.querySelector("#body").value
+
+            try {
+                const response = await fetch("http://localhost:3000/blogs", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ author, title, body })
+                })
+
+                await response.json();
+
+                alert("Data posted!");
+
+                form.reset();
+            }
+            catch (err) {
+                console.log(err);
+
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

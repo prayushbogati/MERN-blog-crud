@@ -1,0 +1,7 @@
+# node modules folders
+frontend/node_modules/
+backend/node_modules/
+
+# dotEnv file
+backend/.env
+# frontend/.env

@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import bcrypt from "bcrypt"
+import validator from "validator"
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -14,12 +15,45 @@ const userSchema = new mongoose.Schema({
 })
 
 
+// static login method
+userSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email }) // this points to database
+
+    if (!email || !password) {
+        throw Error("Please fill all the fields!")
+    }
+
+    if (!user) {
+        throw Error("User does not exist!")
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if(!match){
+        throw Error("Incorrect password!")
+    }
+    
+    return user
+}
+
 // static signup method
 userSchema.statics.signup = async function (email, password) {
-    const exists = await this.findOne({ email })
+    const exists = await this.findOne({ email }) // this points to database
+
+    if (!email || !password) {
+        throw Error("Please fill all the fields!")
+    }
+
+    if (!validator.isEmail(email)) {
+        throw Error("Invalid email!")
+    }
+
+    if (!validator.isStrongPassword(password)) {
+        throw Error("Enter a strong password!")
+    }
 
     if (exists) {
-        throw Error("this email already exists!")
+        throw Error("Email already exists!")
     }
 
     const salt = await bcrypt.genSalt(10)

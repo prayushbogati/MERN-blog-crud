@@ -4,14 +4,14 @@ import useSignup from '../../hooks/useSignup'
 const Signup = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const { signup, Error, IsLoading } = useSignup()
+    const { signup, error, isLoading } = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const signed = await signup(email, password)
 
-        if(signed){
+        if (signed) {
             setEmail("")
             setPassword("")
         }
@@ -40,8 +40,8 @@ const Signup = () => {
                     className='border border-gray-500 rounded-md my-2 px-2 py-1 w-70'
                 /> <br />
 
-                <button type='submit' disabled={IsLoading} className='bg-green-600 hover:bg-green-700 p-1 rounded-md text-white'>Signup</button>
-                {Error && <div className='text-red-500'>{Error}</div>}
+                <button type='submit' disabled={isLoading} className='bg-green-600 hover:bg-green-700 p-1 rounded-md text-white'>Signup</button>
+                {error && <div className='text-red-500'>{error}</div>}
             </form>
         </div>
     )

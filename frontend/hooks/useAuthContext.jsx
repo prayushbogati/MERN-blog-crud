@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { authContext } from "../context/authContext";
+import { AuthContext } from "../context/authContext";
 
-export const useAuthContext = () => {
-    const context = useContext(authContext)
+export const UseAuthContext = () => {
+    const context = useContext(AuthContext)
 
     if (!context) {
         throw Error("useAuthContext is only available inside authContextProvider")

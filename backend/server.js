@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import run from "./dbConn.js";
 import blogPosts from "./Routes/blogRoutes.js";
-import userRoute from "./Routes/userRoutes.js"
+import userRoutes from "./Routes/userRoutes.js"
 import cors from "cors";
 
 dotenv.config();
@@ -38,7 +38,7 @@ app.get("/update", (req, res)=>{
 const startServer = async () => {
     await run()
     app.use("/blogs", blogPosts)
-    app.use("/users", userRoute)
+    app.use("/users", userRoutes)
 
     app.listen(port, () => {
         console.log("app running on port", port);

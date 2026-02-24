@@ -4,6 +4,7 @@ import BlogDetails from '../components/BlogDetails'
 import BlogForm from '../components/BlogForm'
 import { useBlogContext } from '../../hooks/useBlogContext'
 
+
 const Home = () => {
     const { blogs, dispatch } = useBlogContext()
 
@@ -21,22 +22,24 @@ const Home = () => {
     }, [dispatch])
 
     return (
-        <div className="flex justify-center gap-0px m-20">
-            <div className='flex flex-col gap-10 items-center w-2/3'>
-                {blogs && blogs.length > 0 && blogs.map((blog) => (
+        <>
+            <div className="flex justify-center gap-0px m-20">
+                <div className='flex flex-col gap-10 items-center w-2/3'>
+                    {blogs && blogs.length > 0 && blogs.map((blog) => (
 
-                    <BlogDetails key={blog._id} blog={blog} />
+                        <BlogDetails key={blog._id} blog={blog} />
 
-                ))}
+                    ))}
 
-                {blogs && blogs.length === 0 &&
+                    {blogs && blogs.length === 0 &&
 
-                    <p className='text-red-500 italic'>No blogs present</p>
+                        <p className='text-red-500 italic'>No blogs present</p>
 
-                }
+                    }
+                </div>
+                <BlogForm />
             </div>
-            <BlogForm />
-        </div>
+        </>
     )
 }
 

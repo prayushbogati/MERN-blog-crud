@@ -17,6 +17,11 @@ const blogSchema = new Schema({
         type: String,
         required: true,
         trim: true,
+    },
+    user_id: {
+        type: String,
+        required: true,
+        trim: true,
     }
 },
     {

@@ -10,12 +10,12 @@ const Navbar = () => {
     logout()
   }
   return (
-    <div className='flex justify-between mx-20 my-5 items-center'>
+    <div className='flex justify-between mt-0 px-20 my-5 items-center h-25 bg-slate-100'>
       <Link to="/" className='text-3xl font-bold cursor-pointer'>CRUD</Link>
 
       {user && (<div className='flex gap-5 items-center'>
         <span className='block'>{user.email}</span>
-        <button onClick={handleClick} className='text-2xl cursor-pointer'>Logout</button>
+        <button onClick={logout} className='text-2xl cursor-pointer'>Logout</button>
       </div>)}
 
       {!user && (<nav className='flex gap-10'>

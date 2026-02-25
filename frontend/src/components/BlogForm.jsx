@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useBlogContext } from '../../hooks/useBlogContext'
+import { UseAuthContext } from '../../hooks/useAuthContext';
 
 const BlogForm = () => {
     const { dispatch } = useBlogContext();
@@ -9,16 +10,20 @@ const BlogForm = () => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
+    const { user } = UseAuthContext()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const blog = { title, author, body }
 
+
         const response = await fetch("http://localhost:3000/blogs", {
             method: "POST",
             body: JSON.stringify(blog),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const data = await response.json();
@@ -27,7 +32,7 @@ const BlogForm = () => {
             setError(data.error)
             setEmptyFields(data.emptyFields)
             console.log(emptyFields);
-            
+
         }
 
         if (response.ok) {
@@ -44,13 +49,15 @@ const BlogForm = () => {
     }
 
     return (
-        <div className='w-1/3 mx-auto p-10'>
+        <div className='px-10 rounded-2xl bg-slate-100 flex flex-col items-center pt-5'>
+            <div className='text-2xl'>Add Blogs</div>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-72">
 
-                <div className="flex flex-col">
+                <div className="flex flex-col mt-5">
                     <label>Title</label>
                     <input
-                        className={`border border-gray-400 p-1 ${emptyFields.includes('title') ? 'border-red-600' : 'border-gray-400'}`}
+                        className={`border border-gray-400 p-1 ${emptyFields.includes('title') ? 'border-red-500' : 'border-gray-400'}`}
                         type="text"
                         name="title"
                         onChange={(e) => setTitle(e.target.value)}
@@ -61,7 +68,7 @@ const BlogForm = () => {
                 <div className="flex flex-col">
                     <label>Author</label>
                     <input
-                        className={`border border-gray-400 p-1 ${emptyFields.includes('author') ? 'border-red-600' : 'border-gray-400'}`}
+                        className={`border border-gray-400 p-1 ${emptyFields.includes('author') ? 'border-red-500' : 'border-gray-400'}`}
                         type="text"
                         name="author"
                         onChange={(e) => setAuthor(e.target.value)}
@@ -72,7 +79,7 @@ const BlogForm = () => {
                 <div className="flex flex-col">
                     <label>Body</label>
                     <input
-                        className={`border border-gray-400 p-1 ${emptyFields.includes('body') ? 'border-red-600' : 'border-gray-400'}`}
+                        className={`border border-gray-400 p-1 ${emptyFields.includes('body') ? 'border-red-500' : 'border-gray-400'}`}
                         type="text"
                         name="body"
                         onChange={(e) => setBody(e.target.value)}
@@ -80,12 +87,12 @@ const BlogForm = () => {
                     />
                 </div>
 
-                <button type="submit" className="border mt-2 p-1 hover:bg-gray-200">
+                <button type="submit" className="border p-1 hover:bg-gray-200 mt-5">
                     Save
                 </button>
 
+                {error && <div className='text-red-500 text-center'>{error}</div>}
             </form>
-            {error && <div>{error}</div>}
         </div>
     )
 }

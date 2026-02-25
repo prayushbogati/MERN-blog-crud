@@ -1,13 +1,17 @@
 import React from 'react'
 import { useBlogContext } from '../../hooks/useBlogContext'
 import { formatDistanceToNow } from "date-fns"
+import { UseAuthContext } from '../../hooks/useAuthContext'
 
 const BlogDetails = ({ blog }) => {
     const { dispatch } = useBlogContext()
-
+    const { user } = UseAuthContext()
     const handleClick = async () => {
         const response = await fetch(`http://localhost:3000/blogs/${blog._id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            }
         })
         const data = await response.json()
 
@@ -16,7 +20,7 @@ const BlogDetails = ({ blog }) => {
         }
     }
     return (
-        <div className='border w-sm text-center p-5 relative h-40'>
+        <div className='w-sm text-center p-2 relative h-37 rounded-2xl bg-slate-100'>
 
             <h3>Title: {blog.title}</h3>
             <p>Author: {blog.author}</p>

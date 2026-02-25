@@ -4,7 +4,8 @@ import mongoose from "mongoose"
 // get blogs
 const getBlogs = async (req, res) => {
     try {
-        const items = await blogModel.find({})
+        const user_id = req.user._id // id from the users collection
+        const items = await blogModel.find({user_id}).sort({ createdAt: -1 })
 
         res.status(200).json(items);
 
@@ -36,6 +37,8 @@ const getBlog = async (req, res) => {
 const createBlogs = async (req, res) => {
     const { author, title, body } = req.body;
 
+    const user_id = req.user._id
+
     let emptyFields = []
 
     if (!author) {
@@ -56,7 +59,8 @@ const createBlogs = async (req, res) => {
         const items = await blogModel.create({
             author,
             title,
-            body
+            body,
+            user_id
         })
         res.status(201).json(items);
     }

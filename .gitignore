@@ -4,4 +4,4 @@ backend/node_modules/
 
 # dotEnv file
 backend/.env
-# frontend/.env
+frontend/.env

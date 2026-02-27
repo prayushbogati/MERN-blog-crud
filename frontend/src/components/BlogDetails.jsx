@@ -20,7 +20,7 @@ const BlogDetails = ({ blog }) => {
         }
     }
     return (
-        <div className='w-sm text-center p-2 relative h-37 rounded-2xl bg-slate-100'>
+        <div className='w-sm text-center p-2 relative min-h-37 rounded-2xl bg-slate-100'>
 
             <h3>Title: {blog.title}</h3>
             <p>Author: {blog.author}</p>
@@ -28,7 +28,7 @@ const BlogDetails = ({ blog }) => {
             <p>
                 Created: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true })}
             </p>
-            <button onClick={handleClick} className='absolute right-2 bottom-2 bg-red-500 text-white p-1 rounded-md mt-2 hover:bg-red-600'>Delete</button>
+            <button onClick={handleClick} className='absolute right-2 bottom-2 bg-red-500 px-1 text-white rounded-md mt-1 hover:bg-red-600'>Del</button>
         </div>
     )
 }

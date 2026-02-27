@@ -34,7 +34,8 @@ const Home = () => {
 
     return (
         <>
-            <div className="flex justify-around gap-40 m-20">
+            <div className="flex flex-col gap-15 lg:flex-row-reverse justify-around items-center m-20">
+                <BlogForm />
                 <div className='flex flex-col gap-10 items-center'>
                     <h2 className='text-2xl'>Blogs</h2>
                     {blogs && blogs.length > 0 && blogs.map((blog) => (
@@ -49,7 +50,6 @@ const Home = () => {
 
                     }
                 </div>
-                <BlogForm />
             </div>
         </>
     )

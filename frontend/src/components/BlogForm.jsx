@@ -49,7 +49,7 @@ const BlogForm = () => {
     }
 
     return (
-        <div className='px-10 rounded-2xl bg-slate-100 flex flex-col items-center pt-5'>
+        <div className='px-10 rounded-2xl bg-slate-100 flex flex-col items-center pt-5 h-100'>
             <div className='text-2xl'>Add Blogs</div>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-72">

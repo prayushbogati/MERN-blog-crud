@@ -7,7 +7,7 @@ const BlogDetails = ({ blog }) => {
     const { dispatch } = useBlogContext()
     const { user } = UseAuthContext()
     const handleClick = async () => {
-        const response = await fetch(`http://localhost:3000/blogs/${blog._id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/blogs/${blog._id}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${user.token}`

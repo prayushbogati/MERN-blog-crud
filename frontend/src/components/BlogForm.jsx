@@ -18,7 +18,7 @@ const BlogForm = () => {
         const blog = { title, author, body }
 
 
-        const response = await fetch("http://localhost:3000/blogs", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/blogs`, {
             method: "POST",
             body: JSON.stringify(blog),
             headers: {

@@ -52,7 +52,7 @@ const createBlogs = async (req, res) => {
     }
 
     if (emptyFields.length > 0) {
-        return res.status(404).json({ error: "Please fill all the fields", emptyFields })
+        return res.status(400).json({ error: "Please fill all the fields", emptyFields })
     }
 
     try {

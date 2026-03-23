@@ -49,49 +49,37 @@ const BlogForm = () => {
     }
 
     return (
-        <div className='px-10 rounded-2xl bg-slate-100 flex flex-col items-center pt-5 h-100'>
-            <div className='text-2xl'>Add Blogs</div>
+        <div className="bg-white rounded-2xl p-6">
+            <h2 className="text-xl font-semibold mb-4">Add Blog</h2>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-72">
+            <form onSubmit={handleSubmit} className="space-y-4">
 
-                <div className="flex flex-col mt-5">
-                    <label>Title</label>
-                    <input
-                        className={`border border-gray-400 p-1 ${emptyFields.includes('title') ? 'border-red-500' : 'border-gray-400'}`}
-                        type="text"
-                        name="title"
-                        onChange={(e) => setTitle(e.target.value)}
-                        value={title}
-                    />
-                </div>
+                <input
+                    placeholder="Title"
+                    className={`w-full border p-2 rounded-lg ${emptyFields.includes('title') ? 'border-red-500' : ''}`}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
 
-                <div className="flex flex-col">
-                    <label>Author</label>
-                    <input
-                        className={`border border-gray-400 p-1 ${emptyFields.includes('author') ? 'border-red-500' : 'border-gray-400'}`}
-                        type="text"
-                        name="author"
-                        onChange={(e) => setAuthor(e.target.value)}
-                        value={author}
-                    />
-                </div>
+                <input
+                    placeholder="Author"
+                    className={`w-full border p-2 rounded-lg ${emptyFields.includes('author') ? 'border-red-500' : ''}`}
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                />
 
-                <div className="flex flex-col">
-                    <label>Body</label>
-                    <input
-                        className={`border border-gray-400 p-1 ${emptyFields.includes('body') ? 'border-red-500' : 'border-gray-400'}`}
-                        type="text"
-                        name="body"
-                        onChange={(e) => setBody(e.target.value)}
-                        value={body}
-                    />
-                </div>
+                <textarea
+                    placeholder="Body"
+                    className={`w-full border p-2 rounded-lg ${emptyFields.includes('body') ? 'border-red-500' : ''}`}
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                />
 
-                <button type="submit" className="border p-1 hover:bg-gray-200 mt-5">
-                    Save
+                <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">
+                    Save Blog
                 </button>
 
-                {error && <div className='text-red-500 text-center'>{error}</div>}
+                {error && <p className="text-red-500 text-sm">{error}</p>}
             </form>
         </div>
     )

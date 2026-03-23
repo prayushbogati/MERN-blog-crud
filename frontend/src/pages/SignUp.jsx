@@ -17,32 +17,27 @@ const Signup = () => {
         }
     }
     return (
-        <div className='max-w-100 text-center mx-auto p-5 rounded-2xl mt-20 h-75 bg-slate-100'>
-            <h3 className='text-2xl bold mb-5'>Sign up</h3>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label><br />
-                <input
-                    type="text"
-                    name='email'
-                    id='email'
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    className='border border-gray-500 rounded-md my-2 px-2 py-1 w-70'
-                /> <br />
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+            <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
+                <h2 className="text-2xl font-bold text-center mb-6">Signup</h2>
 
-                <label htmlFor="password">Password</label><br />
-                <input
-                    type="password"
-                    name='password'
-                    id='password'
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    className='border border-gray-500 rounded-md my-2 px-2 py-1 w-70'
-                /> <br />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <label className="text-sm">Email</label><br />
+                    <input type="text" name='email' id='email' onChange={(e) => setEmail(e.target.value)} value={email} className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
 
-                <button type='submit' disabled={isLoading} className='bg-green-600 hover:bg-green-700 p-1 rounded-md text-white mt-2'>Signup</button>
-                {error && <div className='text-red-500'>{error}</div>}
-            </form>
+                    <label className="text-sm">Password</label><br />
+                    <input type="password" name='password' id='password' onChange={(e) => setPassword(e.target.value)} value={password} className="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+
+                    <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition"
+                    >
+                        {isLoading ? "Loading..." : "Signup"}
+                    </button>
+
+                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                </form>
+            </div>
         </div>
     )
 }

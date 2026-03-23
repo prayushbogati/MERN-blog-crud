@@ -34,21 +34,24 @@ const Home = () => {
 
     return (
         <>
-            <div className="flex flex-col gap-15 lg:flex-row-reverse justify-around items-center m-20">
+            <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8">
+
+                {/* Blog Form */}
                 <BlogForm />
-                <div className='flex flex-col gap-10 items-center'>
-                    <h2 className='text-2xl'>Blogs</h2>
-                    {blogs && blogs.length > 0 && blogs.map((blog) => (
 
-                        <BlogDetails key={blog._id} blog={blog} />
+                {/* Blog List */}
+                <div>
+                    <h2 className="text-xl font-semibold mb-4">Blogs</h2>
 
-                    ))}
-
-                    {blogs && blogs.length === 0 &&
-
-                        <p className='text-red-500 italic'>No blogs present</p>
-
-                    }
+                    <div className="space-y-4">
+                        {blogs?.length > 0 ? (
+                            blogs.map(blog => (
+                                <BlogDetails key={blog._id} blog={blog} />
+                            ))
+                        ) : (
+                            <p className="text-gray-500 italic">No blogs yet</p>
+                        )}
+                    </div>
                 </div>
             </div>
         </>

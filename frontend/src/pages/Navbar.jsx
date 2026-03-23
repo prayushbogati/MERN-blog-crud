@@ -10,19 +10,28 @@ const Navbar = () => {
     logout()
   }
   return (
-    <div className='flex flex-col md:flex-row md:justify-between mt-0 px-20 my-5 items-center h-25 bg-slate-100'>
-      <Link to="/" className='text-3xl font-bold cursor-pointer'>CRUD</Link>
+    <div className="bg-white shadow-md px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
 
-      {user && (<div className='flex gap-5 items-center'>
-        <span className='block'>{user.email}</span>
-        <button onClick={logout} className='text-2xl cursor-pointer'>Logout</button>
-      </div>)}
+      <Link to="/" className="text-2xl font-bold text-green-600">
+        Blog App
+      </Link>
 
-      {!user && (<nav className='flex gap-10'>
-        <Link to="/login" className='text-2xl cursor-pointer'>Login</Link>
-        <Link to="/signup" className='text-2xl cursor-pointer'>Signup</Link>
-      </nav>)}
-
+      {user ? (
+        <div className="flex items-center gap-4">
+          <span className="text-sm text-gray-600">{user.email}</span>
+          <button
+            onClick={logout}
+            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className="flex gap-4">
+          <Link className="hover:text-green-600" to="/login">Login</Link>
+          <Link className="hover:text-green-600" to="/signup">Signup</Link>
+        </div>
+      )}
     </div>
   )
 }

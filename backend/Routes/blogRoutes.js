@@ -15,5 +15,4 @@ router.route("/:id")
     .put(updateBlog)
     .delete(deleteBlog)
 
-
 export default router;

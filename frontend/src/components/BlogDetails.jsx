@@ -20,15 +20,24 @@ const BlogDetails = ({ blog }) => {
         }
     }
     return (
-        <div className='w-sm text-center p-2 relative min-h-37 rounded-2xl bg-slate-100'>
+        <div className="bg-white shadow-md rounded-xl p-4 relative">
 
-            <h3>Title: {blog.title}</h3>
-            <p>Author: {blog.author}</p>
-            <p>Desc: {blog.body}</p>
-            <p>
-                Created: {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true })}
+            <h3 className="text-lg font-semibold text-green-700">{blog.title}</h3>
+
+            <p className="text-sm text-gray-600">by {blog.author}</p>
+
+            <p className="mt-2 text-gray-700">{blog.body}</p>
+
+            <p className="text-xs text-gray-400 mt-2">
+                {formatDistanceToNow(new Date(blog.createdAt), { addSuffix: true })}
             </p>
-            <button onClick={handleClick} className='absolute right-2 bottom-2 bg-red-500 px-1 text-white rounded-md mt-1 hover:bg-red-600'>Del</button>
+
+            <button
+                onClick={handleClick}
+                className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+            >
+                ✕
+            </button>
         </div>
     )
 }
